@@ -4,7 +4,7 @@ plugins {
     `maven-publish`
 }
 
-group = "net.azisaba"
+group = "net.azisaba.library"
 version = "1.0.0-SNAPSHOT"
 
 repositories {
