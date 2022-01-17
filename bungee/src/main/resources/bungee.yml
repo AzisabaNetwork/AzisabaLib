@@ -1,0 +1,4 @@
+name: AzisabaLib
+main: net.azisaba.library.bungee.BungeePlugin
+version: @version@
+author: AzisabaNetwork

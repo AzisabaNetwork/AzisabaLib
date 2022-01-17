@@ -1,0 +1,6 @@
+name: AzisabaLib
+main: net.azisaba.library.spigot.plugin.SpigotPlugin
+version: @version@
+commands:
+  azisabalib:
+    permission: azisabalib.use_command
