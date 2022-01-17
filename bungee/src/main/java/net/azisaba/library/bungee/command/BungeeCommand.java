@@ -21,6 +21,6 @@ public class BungeeCommand extends Command implements TabExecutor {
 
     @Override
     public Iterable<String> onTabComplete(CommandSender sender, String[] args) {
-        return command.tabComplete(BungeeActor.of(sender), args).join();
+        return command.suggestAsync(BungeeActor.of(sender), args).join();
     }
 }

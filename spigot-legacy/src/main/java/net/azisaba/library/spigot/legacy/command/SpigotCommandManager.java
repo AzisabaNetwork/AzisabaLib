@@ -36,7 +36,7 @@ public class SpigotCommandManager extends CommandManager {
             }
 
             @Override
-            public @NotNull CompletableFuture<List<String>> tabComplete(@NotNull Actor actor, @NotNull String @NotNull [] args) {
+            public @NotNull CompletableFuture<List<String>> suggestAsync(@NotNull Actor actor, @NotNull String @NotNull [] args) {
                 return CompletableFuture.supplyAsync(() -> command.tabComplete(((CommandSenderHolder<?>) actor).getSender(), command.getName(), args));
             }
 
@@ -69,7 +69,7 @@ public class SpigotCommandManager extends CommandManager {
             return true;
         });
         server.getPluginCommand(command.getName()).setTabCompleter((sender, bukkitCommand, alias, args) ->
-                command.tabComplete(SpigotActors.create(sender), args).join()
+                command.suggestAsync(SpigotActors.create(sender), args).join()
         );
     }
 }

@@ -17,7 +17,7 @@ public class AzisabaLibCommand extends Command {
     }
 
     @Override
-    public @NotNull CompletableFuture<List<String>> tabComplete(@NotNull Actor actor, @NotNull String @NotNull [] args) {
-        return super.tabComplete(actor, args);
+    public @NotNull CompletableFuture<List<String>> suggestAsync(@NotNull Actor actor, @NotNull String @NotNull [] args) {
+        return super.suggestAsync(actor, args);
     }
 }

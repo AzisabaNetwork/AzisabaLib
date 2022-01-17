@@ -39,7 +39,7 @@ public class VelocityCommandManager extends CommandManager {
 
             @Override
             public CompletableFuture<List<String>> suggestAsync(Invocation invocation) {
-                return command.tabComplete(VelocityActor.of(invocation.source()), invocation.arguments());
+                return command.suggestAsync(VelocityActor.of(invocation.source()), invocation.arguments());
             }
         });
     }

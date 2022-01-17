@@ -48,7 +48,7 @@ public abstract class Command {
     public abstract void execute(@NotNull Actor actor, @NotNull String@NotNull[] args);
 
     @NotNull
-    public CompletableFuture<List<String>> tabComplete(@NotNull Actor actor, @NotNull String@NotNull[] args) {
+    public CompletableFuture<List<String>> suggestAsync(@NotNull Actor actor, @NotNull String@NotNull[] args) {
         return CompletableFuture.completedFuture(Collections.emptyList());
     }
 }

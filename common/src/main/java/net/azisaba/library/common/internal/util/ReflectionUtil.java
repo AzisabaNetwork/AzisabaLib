@@ -6,6 +6,8 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Method;
 
 public class ReflectionUtil {
+    // 1. look for method on superclass
+    // 2. look for method on interfaces, then interfaces in interface...
     @Nullable
     public static Method findMethod(@NotNull Class<?> clazz, @NotNull Method m) {
         try {
