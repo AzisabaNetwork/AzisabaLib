@@ -84,4 +84,15 @@ public class VelocityServer implements IServer {
     public @NotNull CommandManager getCommandManager() {
         return commandManager;
     }
+
+    @Override
+    public @NotNull String getVersion() {
+        return server
+                .getPluginManager()
+                .getPlugin("azisabalib")
+                .orElseThrow(AssertionError::new)
+                .getDescription()
+                .getVersion()
+                .orElse("Unknown");
+    }
 }

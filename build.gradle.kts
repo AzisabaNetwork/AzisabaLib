@@ -5,7 +5,7 @@ plugins {
 }
 
 group = "net.azisaba.library"
-version = "1.0.0-SNAPSHOT"
+version = "1.1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
@@ -26,7 +26,8 @@ subprojects {
     }
 
     dependencies {
-        compileOnly("net.kyori:adventure-api:4.9.3")
+        api("net.kyori:adventure-api:4.9.3")
+        api("net.kyori:adventure-text-serializer-gson:4.9.3")
         compileOnly("org.jetbrains:annotations:23.0.0")
         testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
         testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")

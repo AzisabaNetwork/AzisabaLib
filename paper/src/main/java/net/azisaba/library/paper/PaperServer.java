@@ -12,11 +12,13 @@ import net.azisaba.library.spigot.legacy.actor.SpigotActors;
 import net.azisaba.library.spigot.legacy.command.SpigotCommandManager;
 import net.azisaba.library.spigot.modern.SpigotWorld;
 import net.azisaba.library.spigot.modern.actor.SpigotConsoleActor;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -78,5 +80,10 @@ public class PaperServer implements IDedicatedServer {
     @Override
     public @NotNull CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    @Override
+    public @NotNull String getVersion() {
+        return Objects.requireNonNull(Bukkit.getPluginManager().getPlugin("AzisabaLib")).getDescription().getVersion();
     }
 }

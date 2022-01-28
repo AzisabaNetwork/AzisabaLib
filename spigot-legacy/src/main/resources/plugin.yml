@@ -1,5 +1,5 @@
 name: AzisabaLib
-main: net.azisaba.library.spigot.plugin.SpigotPlugin
+main: net.azisaba.library.spigot.legacy.plugin.SpigotPlugin
 version: @version@
 commands:
   azisabalib:

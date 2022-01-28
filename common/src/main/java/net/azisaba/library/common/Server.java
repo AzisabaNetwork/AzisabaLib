@@ -114,4 +114,13 @@ public final class Server {
     public static CommandManager getCommandManager() {
         return server.getCommandManager();
     }
+
+    /**
+     * Gets the AzisabaLib version.
+     * @return version
+     */
+    @NotNull
+    public static String getVersion() {
+        return server.getVersion();
+    }
 }

@@ -12,7 +12,7 @@ dependencies {
 
 tasks {
     withType<com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar> {
-        relocate("net.kyori", "net.azisaba.library.libs.net.kyori")
+        //relocate("net.kyori", "net.azisaba.library.libs.net.kyori")
         archiveFileName.set("AzisabaLib-${parent!!.version}.jar")
     }
 }

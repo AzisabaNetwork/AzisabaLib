@@ -1,8 +1,10 @@
 package net.azisaba.library.common.util;
 
+import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Array;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -39,5 +41,12 @@ public class Util {
                 }
             };
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <T> T @NotNull [] removeFirst(Class<T> clazz, T @NotNull [] arr) {
+        T[] array = (T[]) Array.newInstance(clazz, arr.length - 1);
+        System.arraycopy(arr, 1, array, 0, arr.length - 1);
+        return array;
     }
 }

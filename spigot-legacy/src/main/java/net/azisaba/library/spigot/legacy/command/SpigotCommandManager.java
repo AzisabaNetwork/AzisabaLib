@@ -29,7 +29,7 @@ public class SpigotCommandManager extends CommandManager {
     @Override
     public @NotNull Command getCommandByName(@NotNull String name) {
         PluginCommand command = server.getPluginCommand(name);
-        return new Command(command.getName(), command.getPermission()) {
+        return new Command(command.getName(), command.getPermission(), command.getUsage()) {
             @Override
             public void execute(@NotNull Actor actor, @NotNull String @NotNull [] args) {
                 command.execute(((CommandSenderHolder<?>) actor).getSender(), command.getName(), args);

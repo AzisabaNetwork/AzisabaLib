@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 public class SpigotPlugin extends JavaPlugin {
     @Override
-    public void onLoad() {
+    public void onEnable() {
         Environment env = Environment.detect();
         if (env == Environment.PAPER) {
             // Paper

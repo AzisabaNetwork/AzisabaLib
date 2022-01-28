@@ -12,6 +12,7 @@ import net.md_5.bungee.api.ProxyServer;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -75,5 +76,10 @@ public class BungeeServer implements IServer {
     @Override
     public @NotNull CommandManager getCommandManager() {
         return commandManager;
+    }
+
+    @Override
+    public @NotNull String getVersion() {
+        return Objects.requireNonNull(server.getPluginManager().getPlugin("AzisabaLib")).getDescription().getVersion();
     }
 }

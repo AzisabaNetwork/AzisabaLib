@@ -4,6 +4,7 @@ import net.azisaba.library.common.util.ClassUtil;
 import org.jetbrains.annotations.NotNull;
 
 public enum Environment {
+    BUNGEECORD("BungeeCord", "net.md_5.bungee.api.ProxyServer"),
     PAPER("Paper", "com.destroystokyo.paper.PaperConfig"),
     SPIGOT1("Spigot (1.x-1.15)", "org.spigotmc.SpigotConfig"),
     SPIGOT2("Spigot (1.16+)", "org.spigotmc.SpigotConfig"),
@@ -30,6 +31,10 @@ public enum Environment {
 
     @NotNull
     public static Environment detect() {
+        if (BUNGEECORD.isServerClassPresent() &&
+                ClassUtil.isClassPresent("net.azisaba.library.bungee.BungeeServer")) {
+            return BUNGEECORD;
+        }
         if (PAPER.isServerClassPresent() &&
                 ClassUtil.isClassPresent("net.kyori.adventure.text.Component") &&
                 ClassUtil.isClassPresent("net.azisaba.library.paper.PaperServer")) {
@@ -42,7 +47,18 @@ public enum Environment {
             }
             return SPIGOT1;
         }
-        if (VELOCITY.isServerClassPresent()) return VELOCITY;
+        if (VELOCITY.isServerClassPresent() &&
+                ClassUtil.isClassPresent("net.azisaba.library.velocity.VelocityServer")) {
+            return VELOCITY;
+        }
         return UNKNOWN;
+    }
+
+    public boolean isProxy() {
+        return this == BUNGEECORD || this == VELOCITY;
+    }
+
+    public boolean isServerImplementation() {
+        return this == SPIGOT1 || this == SPIGOT2 || this == PAPER;
     }
 }

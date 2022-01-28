@@ -86,4 +86,7 @@ public interface IServer {
 
     @NotNull
     CommandManager getCommandManager();
+
+    @NotNull
+    String getVersion();
 }
