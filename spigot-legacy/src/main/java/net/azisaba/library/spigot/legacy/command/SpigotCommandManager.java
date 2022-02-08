@@ -12,6 +12,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.concurrent.CompletableFuture;
 
 public class SpigotCommandManager extends CommandManager {
@@ -29,6 +30,7 @@ public class SpigotCommandManager extends CommandManager {
     @Override
     public @NotNull Command getCommandByName(@NotNull String name) {
         PluginCommand command = server.getPluginCommand(name);
+        if (command == null) throw new NoSuchElementException("Command " + name + " does not exist");
         return new Command(command.getName(), command.getPermission(), command.getUsage()) {
             @Override
             public void execute(@NotNull Actor actor, @NotNull String @NotNull [] args) {

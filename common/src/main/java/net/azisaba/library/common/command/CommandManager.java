@@ -14,6 +14,7 @@ public abstract class CommandManager {
      * Gets a command by its name.
      * @param name command name
      * @return command
+     * @throws java.util.NoSuchElementException if a command is not registered with provided name
      * @throws UnsupportedOperationException if the operation is not supported in current platform
      */
     @NotNull
