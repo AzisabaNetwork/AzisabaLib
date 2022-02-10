@@ -3,11 +3,18 @@ package net.azisaba.library.spigot.legacy.command;
 import net.azisaba.library.common.actor.Actor;
 import net.azisaba.library.common.command.Command;
 import net.azisaba.library.common.command.CommandManager;
+import net.azisaba.library.common.command.CommandSubCommand;
+import net.azisaba.library.common.internal.commands.AzisabaLibCommand;
 import net.azisaba.library.common.permission.PermissionHolder;
 import net.azisaba.library.spigot.legacy.actor.CommandSenderHolder;
-import net.azisaba.library.spigot.legacy.actor.SpigotActors;
+import net.azisaba.library.spigot.legacy.Constructors;
+import net.md_5.bungee.api.ChatColor;
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.entity.Damageable;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -65,13 +72,37 @@ public class SpigotCommandManager extends CommandManager {
 
     @Override
     protected void registerCommand0(@NotNull Command command) {
+        injectAzisabaLibCommands(command);
         server.getPluginCommand(command.getName()).setPermission(command.getPermission());
         server.getPluginCommand(command.getName()).setExecutor((sender, bukkitCommand, label, args) -> {
-            command.execute(SpigotActors.create(sender), args);
+            command.execute(Constructors.createActor(sender), args);
             return true;
         });
         server.getPluginCommand(command.getName()).setTabCompleter((sender, bukkitCommand, alias, args) ->
-                command.suggestAsync(SpigotActors.create(sender), args).join()
+                command.suggestAsync(Constructors.createActor(sender), args).join()
         );
+    }
+
+    private static void injectAzisabaLibCommands(Command command) {
+        if (command instanceof AzisabaLibCommand) {
+            ((CommandSubCommand) command).withSubCommands(new Command("damagenearby", "azisabalib.command.damagenearby", "") {
+                @Override
+                public void execute(@NotNull Actor actor, @NotNull String @NotNull [] args) {
+                    CommandSender sender = ((CommandSenderHolder<?>) actor).getSender();
+                    if (!(sender instanceof Player)) return;
+                    if (args.length == 0) {
+                        sender.sendMessage(ChatColor.RED + "/azisabalib damagenearby <player>");
+                        return;
+                    }
+                    Player target = Bukkit.getPlayerExact(args[0]);
+                    if (target == null) return;
+                    ((Player) sender).getNearbyEntities(3, 3, 3).forEach(entity -> {
+                        if (entity instanceof Damageable) {
+                            ((Damageable) entity).damage(0.1, target);
+                        }
+                    });
+                }
+            });
+        }
     }
 }

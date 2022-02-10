@@ -25,7 +25,7 @@ public class SpigotCapturedBlock implements CapturedBlock {
 
     @Override
     public boolean isEmpty() {
-        return type.name().endsWith("_AIR") || type.name().equals("AIR");
+        return type == Material.AIR || type.name().endsWith("_AIR");
     }
 
     @Override

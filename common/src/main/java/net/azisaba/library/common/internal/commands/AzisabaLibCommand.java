@@ -12,11 +12,12 @@ import org.jetbrains.annotations.NotNull;
 
 public class AzisabaLibCommand extends CommandSubCommand {
     public AzisabaLibCommand() {
-        super(prefixForCommand() + "azisabalib", "azisabalib.use_command");
+        super(getCommandName(), "azisabalib.use_command");
         withSubCommands(
                 new Command("info", "azisabalib.command.info", "") {
                     @Override
                     public void execute(@NotNull Actor actor, @NotNull String @NotNull [] args) {
+                        actor.sendMessage("");
                         actor.sendMessage(
                                 Component.text("")
                                         .append(Component.text("AzisabaLib").color(NamedTextColor.AQUA))
@@ -61,5 +62,10 @@ public class AzisabaLibCommand extends CommandSubCommand {
             return "v";
         }
         return "";
+    }
+
+    @NotNull
+    public static String getCommandName() {
+        return prefixForCommand() + "azisabalib";
     }
 }

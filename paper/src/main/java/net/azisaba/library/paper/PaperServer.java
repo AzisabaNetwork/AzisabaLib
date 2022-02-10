@@ -8,7 +8,7 @@ import net.azisaba.library.paper.actor.PaperPlayerActor;
 import net.azisaba.library.server.IDedicatedServer;
 import net.azisaba.library.server.World;
 import net.azisaba.library.server.actor.ServerPlayerActor;
-import net.azisaba.library.spigot.legacy.actor.SpigotActors;
+import net.azisaba.library.spigot.legacy.Constructors;
 import net.azisaba.library.spigot.legacy.command.SpigotCommandManager;
 import net.azisaba.library.spigot.modern.SpigotWorld;
 import net.azisaba.library.spigot.modern.actor.SpigotConsoleActor;
@@ -33,8 +33,8 @@ public class PaperServer implements IDedicatedServer {
         this.server = server;
         this.logger = Logger.createFromJavaLogger(logger);
         this.commandManager = new SpigotCommandManager(server);
-        SpigotActors.playerActorConstructor = PaperPlayerActor::new;
-        SpigotActors.consoleActorConstructor = SpigotConsoleActor::new;
+        Constructors.playerActorConstructor = PaperPlayerActor::new;
+        Constructors.consoleActorConstructor = SpigotConsoleActor::new;
     }
 
     @Override

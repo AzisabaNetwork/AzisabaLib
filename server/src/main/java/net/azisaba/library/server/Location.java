@@ -18,6 +18,21 @@ public interface Location {
      */
     @Contract(value = "_, _, _, _ -> new", pure = true)
     static @NotNull Location createSimpleLocation(@Nullable World world, double x, double y, double z) {
+        return createSimpleLocation(world, x, y, z, 0, 0);
+    }
+
+    /**
+     * Creates a new location instance that doesn't depend on platform.
+     * @param world the world
+     * @param x x position
+     * @param y y position
+     * @param z z position
+     * @param yaw the yaw
+     * @param pitch the pitch
+     * @return the location
+     */
+    @Contract(value = "_, _, _, _, _, _ -> new", pure = true)
+    static @NotNull Location createSimpleLocation(@Nullable World world, double x, double y, double z, float yaw, float pitch) {
         return new Location() {
             @Override
             public @Nullable World getWorld() {
@@ -37,6 +52,16 @@ public interface Location {
             @Override
             public double getZ() {
                 return z;
+            }
+
+            @Override
+            public float getYaw() {
+                return yaw;
+            }
+
+            @Override
+            public float getPitch() {
+                return pitch;
             }
         };
     }
@@ -61,6 +86,14 @@ public interface Location {
     }
 
     /**
+     * Checks whether the world is set for the location.
+     * @return true if world is set and present, false otherwise
+     */
+    default boolean hasWorld() {
+        return getWorld() != null;
+    }
+
+    /**
      * Get the X pos.
      * @return x
      */
@@ -77,6 +110,10 @@ public interface Location {
      * @return z
      */
     double getZ();
+
+    float getYaw();
+
+    float getPitch();
 
     /**
      * Returns the floored block X pos.

@@ -7,7 +7,6 @@ import net.azisaba.library.common.command.CommandManager;
 import net.azisaba.library.server.IDedicatedServer;
 import net.azisaba.library.server.World;
 import net.azisaba.library.server.actor.ServerPlayerActor;
-import net.azisaba.library.spigot.legacy.actor.SpigotActors;
 import net.azisaba.library.spigot.legacy.command.SpigotCommandManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
@@ -39,17 +38,17 @@ public class SpigotServer implements IDedicatedServer {
 
     @Override
     public @NotNull Optional<? extends PlayerActor> getPlayer(@NotNull UUID uuid) {
-        return Optional.ofNullable(server.getPlayer(uuid)).map(SpigotActors.playerActorConstructor);
+        return Optional.ofNullable(server.getPlayer(uuid)).map(Constructors.playerActorConstructor);
     }
 
     @Override
     public @NotNull Optional<? extends PlayerActor> getPlayer(@NotNull String name) {
-        return Optional.ofNullable(server.getPlayerExact(name)).map(SpigotActors.playerActorConstructor);
+        return Optional.ofNullable(server.getPlayerExact(name)).map(Constructors.playerActorConstructor);
     }
 
     @Override
     public @NotNull Collection<? extends @NotNull ServerPlayerActor> getPlayers() {
-        return server.getOnlinePlayers().stream().map(SpigotActors.playerActorConstructor).collect(Collectors.toList());
+        return server.getOnlinePlayers().stream().map(Constructors.playerActorConstructor).collect(Collectors.toList());
     }
 
     @Override
@@ -59,7 +58,7 @@ public class SpigotServer implements IDedicatedServer {
 
     @Override
     public @NotNull ConsoleActor getConsoleActor() {
-        return SpigotActors.consoleActorConstructor.apply(Bukkit.getConsoleSender());
+        return Constructors.consoleActorConstructor.apply(Bukkit.getConsoleSender());
     }
 
     @Override

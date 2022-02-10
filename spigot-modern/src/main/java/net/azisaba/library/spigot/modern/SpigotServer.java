@@ -7,7 +7,7 @@ import net.azisaba.library.common.command.CommandManager;
 import net.azisaba.library.server.IDedicatedServer;
 import net.azisaba.library.server.World;
 import net.azisaba.library.server.actor.ServerPlayerActor;
-import net.azisaba.library.spigot.legacy.actor.SpigotActors;
+import net.azisaba.library.spigot.legacy.Constructors;
 import net.azisaba.library.spigot.legacy.command.SpigotCommandManager;
 import net.azisaba.library.spigot.modern.actor.SpigotConsoleActor;
 import net.azisaba.library.spigot.modern.actor.SpigotPlayerActor;
@@ -31,8 +31,8 @@ public class SpigotServer implements IDedicatedServer {
         this.server = server;
         this.logger = Logger.createFromJavaLogger(logger);
         this.commandManager = new SpigotCommandManager(server);
-        SpigotActors.playerActorConstructor = SpigotPlayerActor::new;
-        SpigotActors.consoleActorConstructor = SpigotConsoleActor::new;
+        Constructors.playerActorConstructor = SpigotPlayerActor::new;
+        Constructors.consoleActorConstructor = SpigotConsoleActor::new;
     }
 
     @Override
